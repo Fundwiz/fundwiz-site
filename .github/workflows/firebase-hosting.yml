@@ -3,7 +3,7 @@ name: Deploy to Firebase Hosting on push
 on:
   push:
     branches:
-      - master  # or 'main' if your repo uses main
+      - master
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install Dependencies
         run: npm install
