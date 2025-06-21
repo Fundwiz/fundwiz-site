@@ -22,7 +22,7 @@ export default function HomePage() {
             📊 Nifty Options Tools
           </h3>
           <p className="text-gray-600">
-            Real-time data tools and funding dashboard will appear here.
+            Real-time data tools dashboard will appear here.
           </p>
         </div>
       </section>
