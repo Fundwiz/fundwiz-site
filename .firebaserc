@@ -1,5 +1,16 @@
 {
   "projects": {
-    "default": "fundwiz-website"
-  }
+    "default": "fundwiz-website",
+    "fundwiz": "fundwiz-website"
+  },
+  "targets": {
+    "fundwiz-website": {
+      "hosting": {
+        "niftypulse": [
+          "niftypulse"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
