@@ -7,7 +7,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import FundingPage from "./pages/FundingPage";
 import ContactPage from "./pages/ContactPage";
 import AuthPage from "./pages/AuthPage";
-import Archive from "./pages/Archive";
+import Archive from "./pages/Archives";
 import DailyReport from "./pages/DailyReport";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import PrivateRoute from "./components/PrivateRoute";
