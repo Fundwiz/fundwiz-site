@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
@@ -31,7 +33,12 @@ export default function AuthForm() {
         navigate("/analytics");
       } else {
         // Sign up flow
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        // Create Firestore profile with registration flag
+        await setDoc(doc(db, 'users', userCred.user.uid), {
+          email,
+          isRegisteredClient: true,
+        });
         toast.success("Account created and logged in!");
         navigate("/analytics");
       }
