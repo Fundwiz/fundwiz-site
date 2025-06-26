@@ -7,7 +7,10 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import FundingPage from "./pages/FundingPage";
 import ContactPage from "./pages/ContactPage";
 import AuthPage from "./pages/AuthPage";
-import PrivateRoute from "./components/PrivateRoute"; // ✅ New import
+import Archive from "./pages/Archive";
+import DailyReport from "./pages/DailyReport";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -15,9 +18,12 @@ function App() {
       <Navbar />
 
       <Routes>
+        {/* Public */}
         <Route path="/" element={<HomePage />} />
-        
-        {/* 🔒 Protected Routes */}
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/auth" element={<AuthPage />} />
+
+        {/* Protected */}
         <Route
           path="/analytics"
           element={
@@ -35,9 +41,26 @@ function App() {
           }
         />
 
-        {/* Public Routes */}
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/auth" element={<AuthPage />} />
+        {/* Reports */}
+        <Route
+          path="/reports/:date"
+          element={
+            <PrivateRoute>
+              <DailyReport />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reports/archive"
+          element={
+            <PrivateRoute>
+              <Archive />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Unauthorized */}
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
       </Routes>
 
       <Footer />

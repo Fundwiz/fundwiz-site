@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useMemo } from "react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
-  
-  // Compute today's date in YYYY-MM-DD format
-  const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -27,7 +23,7 @@ export default function Navbar() {
               style={{ marginLeft: "24px" }}
               className="text-gray-700 hover:text-blue-600"
             >
-              Nifty&nbsp;Analytics
+              Nifty Analytics
             </Link>
 
             <Link
@@ -35,7 +31,7 @@ export default function Navbar() {
               style={{ marginLeft: "24px" }}
               className="text-gray-700 hover:text-blue-600"
             >
-              Funding&nbsp;Support
+              Funding Support
             </Link>
 
             <Link
@@ -46,49 +42,40 @@ export default function Navbar() {
               Contact
             </Link>
 
-            {/* Reports dropdown */}
-            <div className="relative group" style={{ marginLeft: "24px" }}>
-              <button className="text-gray-700 hover:text-blue-600 focus:outline-none">
-                Reports
-              </button>
-              <div className="absolute left-0 mt-2 w-48 bg-white shadow-md rounded hidden group-hover:block z-50">
-                <Link
-                  to="/reports/latest"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  Latest
-                </Link>
-                <Link
-                  to={`/reports/${today}`}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  {today}
-                </Link>
-                <Link
-                  to="/reports/archive"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  Archive
-                </Link>
+            {/* Reports dropdown visible **only** to registered clients */}
+            {user && user.isRegisteredClient && (
+              <div className="relative group" style={{ marginLeft: "24px" }}>
+                <button className="text-gray-700 hover:text-blue-600 focus:outline-none">
+                  Reports
+                </button>
+                <div className="absolute left-0 mt-2 w-48 bg-white shadow-md rounded hidden group-hover:block z-50">
+                  <Link
+                    to="/reports/latest"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Daily Report
+                  </Link>
+                  <Link
+                    to="/reports/archive"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Archive
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </nav>
         </div>
 
         {/* login status */}
-        {user && (
+        {user ? (
           <div className="mt-2 flex justify-end items-center space-x-4 text-sm">
             <span className="text-gray-500">{user.email}</span>
-            <button
-              onClick={logout}
-              className="text-red-500 hover:underline"
-            >
+            <button onClick={logout} className="text-red-500 hover:underline">
               Logout
             </button>
           </div>
-        )}
-
-        {!user && (
+        ) : (
           <div className="mt-2 flex justify-end">
             <Link to="/auth" className="text-blue-600 hover:underline text-sm">
               Login
