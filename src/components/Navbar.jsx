@@ -41,6 +41,17 @@ export default function Navbar() {
             >
               Contact
             </Link>
+
+            {/* Daily Nifty Report link */}
+            <a
+              href="/reports/2025-06-26/26_06_25.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ marginLeft: "24px" }}
+              className="text-gray-700 hover:text-blue-600"
+            >
+              Daily Nifty Report
+            </a>
           </nav>
         </div>
 
